@@ -64,8 +64,8 @@ export const registerUser = async (email: string, password: string): Promise<Use
 export const loginUser = async (email: string, password: string): Promise<UserProfile> => {
   
   // 1. Check for Runtime Docker Admin (Bootstrap)
-  // This value is injected into index.html by docker-entrypoint.sh
-  const runtimeAdminPass = window.__ADMIN_PASS__;
+  // This value is injected into index.html by Dockerfile CMD logic via env-config.js
+  const runtimeAdminPass = window.__RUNTIME_CONFIG__?.ADMIN_PASS || window.__ADMIN_PASS__;
   const ADMIN_EMAIL = 'admin@minemind.net';
 
   if (email === ADMIN_EMAIL && runtimeAdminPass) {

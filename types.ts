@@ -88,6 +88,12 @@ export interface TranslationPack {
 // Extend Window to accept runtime config injected by Docker
 declare global {
   interface Window {
-    __ADMIN_PASS__?: string;
+    __RUNTIME_CONFIG__?: {
+      API_KEY: string;
+      GOOGLE_CLIENT_ID?: string;
+      APPLE_CLIENT_ID?: string;
+      ADMIN_PASS?: string;
+    };
+    __ADMIN_PASS__?: string; // Legacy support, but mapped in Dockerfile now
   }
 }
