@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  minemind-forge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: minemind-forge
+    ports:
+      - "8080:80"
+    environment:
+      # --- CRITICAL CONFIGURATION ---
+      # The Google Gemini API Key is required for code generation.
+      - API_KEY=${API_KEY}
+
+      # --- AUTHENTICATION CONFIGURATION (Optional) ---
+      # Client IDs for Social Login Integration.
+      # If left empty, social login buttons will remain visible but inactive or in mock mode.
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - APPLE_CLIENT_ID=${APPLE_CLIENT_ID}
+    restart: unless-stopped
+    # Healthcheck to ensure Nginx is responding
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 3s
+      retries: 3

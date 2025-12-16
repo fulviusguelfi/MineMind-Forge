@@ -1,0 +1,5 @@
+{
+  "name": "MineMind Forge",
+  "description": "A comprehensive generator and simulator for Minecraft AI Companion plugins. Create server-side Paper/Spigot plugins that integrate LLM capabilities into Minecraft entities.",
+  "requestFramePermissions": []
+}
